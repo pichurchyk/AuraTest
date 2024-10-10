@@ -13,4 +13,7 @@ interface BootDao {
 
     @Query("SELECT * FROM BootHistory")
     fun getAllBoots(): List<BootHistoryDBO>
+
+    @Query("SELECT * FROM BootHistory ORDER BY timestamp DESC LIMIT 2")
+    suspend fun getLastTwoBoots(): List<BootHistoryDBO>
 }

@@ -1,4 +1,4 @@
-package com.pichurchyk.auratest.utility
+package com.pichurchyk.auratest.utils
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -25,6 +25,8 @@ class BootReceiver : BroadcastReceiver() {
 
                 val bootHistory = bootDao.getAllBoots()
                 Log.d(LOG_TAG, "Boot History: $bootHistory")
+
+                NotificationWorker.scheduleNotificationWorker(context)
             }
         }
     }
