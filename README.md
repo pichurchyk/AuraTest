@@ -1,7 +1,10 @@
 # BOOT COUNTER APP
 
-Requirements:
+# Requirements:
 https://docs.google.com/document/d/1i0uFS5IcYaZIDv3rqPZRxVzdZLTOQbrJnDItvvbDZmc/edit?usp=sharing
+
+# APK LINK
+https://drive.google.com/file/d/1GFZ8AvDAguxOWrhqedVyZGvExPzZqOHp/view?usp=sharing
 
 ## Application Tech Stack
 - Kotlin
