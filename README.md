@@ -16,5 +16,5 @@ https://docs.google.com/document/d/1i0uFS5IcYaZIDv3rqPZRxVzdZLTOQbrJnDItvvbDZmc/
  - [x] Implementation of base activity
  - [x] Add broadcast receiver
  - [x] Add Room library, set up DAO, Entities, etc.
- - [ ] Add Room to Broadcast receiver
+ - [x] Add Room to Broadcast receiver
  - [ ] Set up WorkManager to schedule notifications
