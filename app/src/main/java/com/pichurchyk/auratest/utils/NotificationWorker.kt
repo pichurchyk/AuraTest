@@ -12,23 +12,27 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.pichurchyk.auratest.R
 import com.pichurchyk.auratest.data.database.BootDatabase
+import com.pichurchyk.auratest.domian.usecase.GetAllBootsUseCase
+import com.pichurchyk.auratest.domian.usecase.GetLastTwoBootsUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.core.Koin
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import java.util.concurrent.TimeUnit
 
-class NotificationWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams) {
+class NotificationWorker(context: Context, workerParams: WorkerParameters) : Worker(context, workerParams), KoinComponent {
+    private val getAllBootsUseCase: GetLastTwoBootsUseCase by inject()
+
     override fun doWork(): Result {
         showNotification()
         return Result.success()
     }
 
     private fun showNotification() {
-        val database = BootDatabase.getDatabase(applicationContext)
-        val bootDao = database.bootDao()
-
         CoroutineScope(Dispatchers.IO).launch {
-            val lastBoots = bootDao.getLastTwoBoots()
+            val lastBoots = getAllBootsUseCase.invoke()
 
             val notificationBody = when {
                 lastBoots.isEmpty() -> "No boots detected"

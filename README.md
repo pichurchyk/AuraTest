@@ -19,9 +19,11 @@ https://docs.google.com/document/d/1i0uFS5IcYaZIDv3rqPZRxVzdZLTOQbrJnDItvvbDZmc/
  - [x] Add Room to Broadcast receiver
  - [x] Set up WorkManager to schedule notifications
  - [x] Add simple recyclerView to MainActivity to show boots history
- - [] Implement DI
- - [] Implement ViewModel, UseCases, Repository to work with Room data
+ - [x] Implement DI
+ - [x] Implement ViewModel, UseCases, Repository to work with Room data
  - [] Move strings and dp to resources (make string res, make dimens res)
  - [] Improve DateUtils
  - [] Avoid using DBO, make ui model, create mapper and map inside repository
  - [] Update UI
+
+**Time spent = 3 hours**

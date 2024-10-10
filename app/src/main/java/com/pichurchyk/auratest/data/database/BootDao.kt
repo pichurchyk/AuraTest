@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BootDao {
@@ -12,7 +13,7 @@ interface BootDao {
     suspend fun saveBootInfo(bootInfo: BootHistoryDBO)
 
     @Query("SELECT * FROM BootHistory")
-    fun getAllBoots(): List<BootHistoryDBO>
+    fun getAllBoots(): Flow<List<BootHistoryDBO>>
 
     @Query("SELECT * FROM BootHistory ORDER BY timestamp DESC LIMIT 2")
     suspend fun getLastTwoBoots(): List<BootHistoryDBO>

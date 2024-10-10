@@ -1,17 +1,19 @@
-package com.pichurchyk.auratest.ui
+package com.pichurchyk.auratest.ui.main
 
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.pichurchyk.auratest.data.database.BootDatabase
 import com.pichurchyk.auratest.databinding.ActivityMainBinding
+import com.pichurchyk.auratest.ui.BootListAdapter
 import com.pichurchyk.auratest.ui.base.BaseActivity
 import com.pichurchyk.auratest.ui.ext.setVisibility
 import com.pichurchyk.auratest.utils.NotificationWorker
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : BaseActivity<ActivityMainBinding>() {
+
+    private val viewModel: MainViewModel by viewModel()
 
     private var bootsAdapter: BootListAdapter = BootListAdapter()
 
@@ -33,15 +35,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             }
         }
 
-        setupDatabaseListener()
-    }
-
-    private fun setupDatabaseListener() {
-        val database = BootDatabase.getDatabase(this)
-        val dao = database.bootDao()
-
-        lifecycleScope.launch(Dispatchers.IO) {
-            dao.getAllBoots().let { boots ->
+        lifecycleScope.launch {
+            viewModel.bootsHistory.collect { boots ->
                 binding.tvEmptyBoots.setVisibility(boots.isEmpty())
                 binding.rvBoots.setVisibility(boots.isNotEmpty())
 

@@ -6,24 +6,14 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(entities = [BootHistoryDBO::class], version = 1, exportSchema = false)
-abstract class BootDatabase : RoomDatabase() {
+internal abstract class BootDatabase : RoomDatabase() {
+    abstract fun dao(): BootDao
+}
 
-    abstract fun bootDao(): BootDao
-
-    companion object {
-        @Volatile
-        private var INSTANCE: BootDatabase? = null
-
-        fun getDatabase(context: Context): BootDatabase {
-            return INSTANCE ?: synchronized(this) {
-                val instance = Room.databaseBuilder(
-                    context.applicationContext,
-                    BootDatabase::class.java,
-                    "boot_database"
-                ).build()
-                INSTANCE = instance
-                instance
-            }
-        }
-    }
+internal fun BootDatabase(applicationContext: Context): BootDatabase {
+    return Room.databaseBuilder(
+        applicationContext,
+        BootDatabase::class.java,
+        "BootDatabase"
+    ).build()
 }
